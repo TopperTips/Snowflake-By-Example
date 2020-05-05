@@ -11,6 +11,10 @@
  
 -- How to show all the stages?
 show stages;
+list @S3_USDF_EXTERNAL_NAMED_STAGE;              --loading all files inside the bucket
+list @S3_USDF_EXTERNAL_NAMED_STAGE/load;         -- loading specific directory
+
+
 
 -- Note : it is not stage, it is stages, make sure you remember the command.
 
