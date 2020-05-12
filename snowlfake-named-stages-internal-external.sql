@@ -13,7 +13,7 @@
 show stages;
 list @S3_USDF_EXTERNAL_NAMED_STAGE;              --loading all files inside the bucket
 list @S3_USDF_EXTERNAL_NAMED_STAGE/load;         -- loading specific directory
-
+list @S3_USDF_EXTERNAL_NAMED_STAGE/load/D;         -- loading specific directory and file within it (look for * is missing)
 
 
 -- Note : it is not stage, it is stages, make sure you remember the command.
