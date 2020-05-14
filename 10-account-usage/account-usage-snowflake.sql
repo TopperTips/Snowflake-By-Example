@@ -21,7 +21,14 @@ Important note
 - By default, only account administrators (users with the ACCOUNTADMIN role) can access the SNOWFLAKE database and schemas within the database, or perform queries on the views
 */
 
+-- Enabling Account Usage for Other Roles
 
+USE ROLE ACCOUNTADMIN;
+GRANT IMPORTED PRIVILEGES ON DATABASE snowflake TO ROLE SYSADMIN;
+GRANT IMPORTED PRIVILEGES ON DATABASE snowflake TO ROLE customrole1;
+
+USE ROLE customrole1;
+SELECT * FROM snowflake.account_usage.databases;
 
 
 -- Sample Queries
