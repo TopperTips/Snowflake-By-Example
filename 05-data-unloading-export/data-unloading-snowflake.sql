@@ -110,10 +110,7 @@ copy into @export_stg/default_csv from part_export
 REMOVE @export_stg/export_stg/default_csv_0_0_0.csv.gz
 
 
-copy into @mystage/myfile.csv.gz from mytable
-file_format = (type=csv compression='gzip')
-single=true
-max_file_size=4900000000;
+
 
 
 -- Creating a table
@@ -154,3 +151,12 @@ copy into @export_stg/myfile.parquet
 from (select id, first_name, last_name, city,state  from tips_export)
 file_format=(type='parquet')
 header = true;
+
+
+
+-- export multiple & compression
+REMOVE @export_stg/file_size_0_0_0.csv.gz
+REMOVE @export_stg/file_size_0_0_1.csv.gz
+copy into @export_stg/file_size from part_export
+file_format = (type=csv compression='gzip')
+max_file_size=102400;
