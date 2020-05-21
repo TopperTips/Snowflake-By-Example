@@ -34,7 +34,7 @@
 
 7. Compare
    
-   Type              Presistent          Cloning           TimeTravel       FailSafe(DR)
+   Type              Persistent          Cloning           TimeTravel       FailSafe(DR)
    Permanent(Std)    Until Dropped       Yes               0 or 1           7 
    Permanent(Ent+)   Until Dropped       Yes               0 or 90          7 
    Transient         Until Dropped       Yes               0 or 1           0 

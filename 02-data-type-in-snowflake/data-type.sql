@@ -125,6 +125,50 @@ Date/time key notes
 	- Time precision can range from 0 (seconds) to 9 (nanoseconds). The default precision is 9
 	- All TIME values must be between 00:00:00 and 23:59:59.999999999
 	- TIME internally stores “wallclock” time, and all operations on TIME values are performed without taking any time zone into consideration
+
+calendar support
+	-Snowflake uses the Gregorian Calendar for all dates and timestamps
+
+Date and Time Constants
+	- Snowflake supports using string constants to specify fixed date, time, or timestamp values
+	- String constants must always be enclosed between delimiter characters
+	- example
+		date '2010-09-14'
+		time '10:03:56'
+		timestamp '2009-09-15 10:59:43'
+
+		create table t1 (d1 date);
+		insert into t1 (d1) values (date '2011-10-29');
+		value format can be set as alter session set date-input-format ='yyyy-MM-dd'
+
+Interval Constants
+	-interval constants to add/subtract a period of time to/from a date, time, or timestamp
+	- Example
+		INTERVAL '1 YEAR' represents 1 year.
+		INTERVAL '4 years, 5 months, 3 hours' represents 4 years, 5 months, and 3 hours
+		INTERVAL '1 year, 1 day' first adds/subtracts a year and then a day.
+		INTERVAL '1 day, 1 year' first adds/subtracts a day and then a year.
+	-SQL
+		select to_date ('2019-02-28') + INTERVAL '1 day, 1 year'; -- result 2020-03-01 
+		select to_date ('2019-02-28') + INTERVAL '1 year, 1 day'; -- result 2020-02-29
+	- INTERVAL is not a data type and can be used only with date/time
+
+	-- More example
+		select to_date('2018-04-15') + INTERVAL '1 year'; -- 2019-04-15  
+		select to_time('04:15:29') + INTERVAL '3 hours, 18 minutes'; --07:33:29
+		select name, hire_date from employees where hire_date > current_date - INTERVAL '2 y, 3 month';
+		select to_date('2025-01-17') + INTERVAL
+                               '1 y, 3 q, 4 mm, 5 w, 6 d, 7 h, 9 m, 8 s,
+                                1000 ms, 445343232 us, 898498273498 ns'
+                            as complex_interval2;
+
+                            -- 2027-03-30 07:31:32.841
+
+Simple Arithmetic for Dates
+	- TIME and TIMESTAMP values do not yet support simple arithmetic.
+	- select to_date('2018-04-15') + 1; -- 2018-04-16 
+	-- select to_date('2018-04-15') - 4; -- 2018-04-11  
+
 */
 
 -- setting the timezone
